@@ -1,12 +1,13 @@
 package roberto.cafagna.U5W1D1.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import roberto.cafagna.U5W1D1.entities.Bevanda;
-import roberto.cafagna.U5W1D1.entities.Menu;
-import roberto.cafagna.U5W1D1.entities.Pizza;
-import roberto.cafagna.U5W1D1.entities.Topping;
+import roberto.cafagna.U5W1D1.Enum.StatoOrdine;
+import roberto.cafagna.U5W1D1.Enum.StatoTavolo;
+import roberto.cafagna.U5W1D1.entities.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Configuration
@@ -44,7 +45,7 @@ public class ConfigClass {
 
 
     @Bean
-    public Bevanda lemonada() {
+    public Bevanda lemonade() {
         return new Bevanda("Lemonade(0.33l)", 128, 1.29);
     }
 
@@ -86,8 +87,26 @@ public class ConfigClass {
     public Menu menu() {
         return new Menu(
                 List.of(margheritaPizza(), hawaiianPizza(), salamiPizza()),
-                List.of(lemonada(), water(), wine()),
+                List.of(lemonade(), water(), wine()),
                 List.of(cheese(), ham(), onions(), pineapple(), salami(), tomato())
         );
     }
+
+    @Bean
+    public Tavolo tavolo1() {
+        return new Tavolo(1, 10, StatoTavolo.LIBERO);
+    }
+
+
+    @Bean
+    public Ordine ordine(@Value("${coperto.price}") double costoCoperto, Tavolo tavolo) {
+        return new Ordine(1,
+                StatoOrdine.IN_CORSO,
+                2,
+                LocalTime.now(),
+                tavolo,
+                List.of(margheritaPizza(), water()),
+                costoCoperto);
+    }
+
 }
