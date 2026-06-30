@@ -97,16 +97,34 @@ public class ConfigClass {
         return new Tavolo(1, 10, StatoTavolo.LIBERO);
     }
 
+    @Bean
+    public Tavolo tavolo2() {
+        return new Tavolo(2, 4, StatoTavolo.OCCUPATO);
+    }
 
     @Bean
-    public Ordine ordine(@Value("${coperto.price}") double costoCoperto, Tavolo tavolo) {
+    public Ordine ordine2(@Value("${coperto.price}") double costoCoperto) {
+        return new Ordine(2,
+                StatoOrdine.SERVITO,
+                2,
+                LocalTime.now(),
+                tavolo2(),
+                List.of(salamiPizza(), hawaiianPizza(), wine(), water(), ham(), tomato()),
+                costoCoperto);
+
+    }
+
+
+    @Bean
+    public Ordine ordine1(@Value("${coperto.price}") double costoCoperto) {
         return new Ordine(1,
                 StatoOrdine.IN_CORSO,
                 2,
                 LocalTime.now(),
-                tavolo,
+                tavolo1(),
                 List.of(margheritaPizza(), water()),
                 costoCoperto);
     }
+
 
 }

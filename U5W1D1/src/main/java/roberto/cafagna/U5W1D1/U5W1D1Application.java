@@ -2,6 +2,7 @@ package roberto.cafagna.U5W1D1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,10 +21,13 @@ public class U5W1D1Application {
     }
 
     @Bean
-    public CommandLineRunner run(Menu menu, Ordine ordine) {
+    public CommandLineRunner run(Menu menu,
+                                 @Qualifier("ordine1") Ordine ordine1,
+                                 @Qualifier("ordine2") Ordine ordine2) {
         return args -> {
             logger.info(menu.toString());
-            logger.info(ordine.toString());
+            logger.info(ordine2.toString());
+            logger.info(ordine1.toString());
         };
     }
 }
