@@ -3,6 +3,7 @@ package roberto.cafagna.U5W1D1.entities;
 import roberto.cafagna.U5W1D1.Enum.StatoOrdine;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ordine {
@@ -15,17 +16,21 @@ public class Ordine {
     private List<MenuItem> prodottiOrdine;
     private double costoCoperto;
 
-    public Ordine(int numOrdine, StatoOrdine statoOrdine, int numCoperti, LocalTime orarioOrdine
-            , Tavolo tavolo, List<MenuItem> prodottiOrdine, double costoCoperto) {
+    public Ordine(int numOrdine, StatoOrdine statoOrdine, int numCoperti
+            , Tavolo tavolo, double costoCoperto) {
         this.numOrdine = numOrdine;
         this.statoOrdine = statoOrdine;
         this.numCoperti = numCoperti;
-        this.orarioOrdine = orarioOrdine;
+        this.orarioOrdine = LocalTime.now();
         this.tavolo = tavolo;
-        this.prodottiOrdine = prodottiOrdine;
+        this.prodottiOrdine = new ArrayList<>();
         this.costoCoperto = costoCoperto;
     }
 
+
+    public void addElement(MenuItem item) {
+        this.prodottiOrdine.add(item);
+    }
 
     public int getId() {
         return id;

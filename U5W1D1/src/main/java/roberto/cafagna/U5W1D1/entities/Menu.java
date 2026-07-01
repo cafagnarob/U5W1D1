@@ -1,7 +1,10 @@
 package roberto.cafagna.U5W1D1.entities;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class Menu {
     private int id;
     private List<Pizza> menuPizze;
@@ -37,6 +40,21 @@ public class Menu {
 
     public void setMenuTopping(List<Topping> menuTopping) {
         this.menuTopping = menuTopping;
+    }
+
+    public void stampaMenu() {
+        System.out.println("------ PIZZE -----");
+        for (Pizza pizza : menuPizze) {
+            System.out.println(pizza);
+        }
+        System.out.println("------ TOPPING -----");
+        for (Topping topping : menuTopping) {
+            System.out.println(topping);
+        }
+        System.out.println("------ BEVANDE -----");
+        for (Bevanda bevanda : menuBevande) {
+            System.out.println(bevanda);
+        }
     }
 
     @Override
