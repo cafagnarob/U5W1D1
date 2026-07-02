@@ -98,8 +98,4 @@ class U5W1D1ApplicationTests {
     }
 
 
-    @Test
-    void contextLoads() {
-    }
-
 }
